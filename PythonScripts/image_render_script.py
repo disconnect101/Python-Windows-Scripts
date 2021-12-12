@@ -1,3 +1,6 @@
+import os
+import sys
+
 import cv2
 from colorama import Fore, Back, Style, init
 
@@ -50,12 +53,18 @@ print(grey_scale.shape)
 image_width = grey_scale.shape[1]
 image_height = grey_scale.shape[0]
 
-console_image_height = int(((image_height/image_width)*CONSOLE_WIDTH)/4.5)
+console_image_height = int(((image_height/image_width)*CONSOLE_WIDTH)/4)
+
+os.system("cls")
 
 print(f"console height: {console_image_height}  console width: {CONSOLE_WIDTH}")
 
 
+
+s = ""
+
 for i in range(0, console_image_height):
+    arr = []
     for j in range(0, CONSOLE_WIDTH):
         row = int((image_height/console_image_height)*i)
         col = int((image_width/CONSOLE_WIDTH)*j)
@@ -63,6 +72,14 @@ for i in range(0, console_image_height):
         val = grey_scale[row][col]
         symbol = get_symbol(val)
 
-        print(f"{Style.BRIGHT}{symbol}", end='')
 
-    print("\n")
+        s += symbol
+        #print(f"{Style.BRIGHT}{symbol}", end='')
+
+    s += "\n"
+    #print("\n")
+
+
+print(s)
+
+
