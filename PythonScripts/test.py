@@ -2,17 +2,13 @@ import os
 import sys
 from os import listdir
 from os.path import isfile, join
+from colorama import init, Fore, Back, Style
 
-import config as conf
 import utils
 
+init(autoreset=True)
 
 COMMAND_NAME = ""
-
-
-def print_description(command_name):
-    description = conf.CMD_MAP[command_name]['description']
-    print(description)
 
 
 def print_files():
@@ -20,7 +16,10 @@ def print_files():
     files = [f for f in listdir(mypath)]
 
     for file in files:
-        print(file)
+        if os.path.isdir(file):
+            print(f"{Fore.YELLOW}{file}")
+        else:
+            print(f"{Fore.GREEN}{file}")
 
     print("\nTotal", len(files), "files and folders")
 
@@ -30,10 +29,10 @@ def main():
 
     for arg in sys.argv[2:]:
         if arg=="-d" or arg=="-D":
-            print_description(COMMAND_NAME)
+            utils.print_description(COMMAND_NAME)
             return
         else:
-            utils.unknown_option(arg)
+            utils.print_unknown_option(arg)
             return
 
     print_files()
