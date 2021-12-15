@@ -1,3 +1,4 @@
+import os
 import re
 
 import config as conf
@@ -22,3 +23,7 @@ def print_unknown_option(option):
 def print_description(command_name):
     description = conf.CMD_MAP[command_name]['description']
     print(description)
+
+
+def clear_screen():
+    os.system('cls')

@@ -12,5 +12,16 @@ CMD_MAP = {
     'list': {
         'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\cmdlist_script.py",
         'description': "List all the files and folders in the current working directory"
+    },
+
+    'imren': {
+        'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\image_render_script.py",
+        'description': "Displays the image as an ASCII drawing"
+    },
+
+    'viren': {
+        'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\video_render_script.py",
+        'description': "Displays the video as an ASCII drawing video"
     }
+
 }

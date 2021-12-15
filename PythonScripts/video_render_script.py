@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import keyword
+from tqdm import tqdm
 
 import cv2
 from colorama import Fore, Back, Style, init
@@ -50,19 +51,22 @@ else:
     CONSOLE_WIDTH = 238
 
 
-video = cv2.VideoCapture("lena.mp4")
+video = cv2.VideoCapture("people.mp4")
 frame_number = 0
 total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
+frame_jump_factor = 20
 
 frames = []
 
-while video.isOpened():
+total_jumps = int(total_frames/frame_jump_factor)
+
+for jump in tqdm(range(0, total_jumps)):
 
     ret, image = video.read()
     #print(image.shape)
     grey_scale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    frame_number += 20
+    frame_number += frame_jump_factor
     if frame_number > total_frames:
         break
     video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
