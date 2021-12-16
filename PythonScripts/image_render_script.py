@@ -16,15 +16,7 @@ AVAILABLE_OPTIONS = {
         'arg_required': True,
         'description': 'to set the resolution of image'
     },
-    '-R': {
-        'arg_required': True,
-        'description': 'to set the resolution of image'
-    },
     '-d': {
-        'arg_required': False,
-        'description': 'gives description of the command'
-    },
-    '-D': {
         'arg_required': False,
         'description': 'gives description of the command'
     }
@@ -138,17 +130,22 @@ def register_options():
     return options
 
 
+def print_ASCII_image(image_as_string, params):
+    utils.clear_screen()
+    print(f"console height: {params['console_image_height']}  console width: {params['console_image_width']}")
+    print(image_as_string)
+
+
 def execute_cmd(options):
+    image_path = options['image_path'] if 'image_path' in options else None
+    resolution = 'default'
+
     if '-d' in options:
         utils.print_description(COMMAND_NAME)
         return
-
-    image_path = options['image_path'] if 'image_path' in options else None
     if not image_path:
         print("No image path provided")
         return
-
-    resolution = 'default'
     if '-r' in options:
         resolution = options['-r']
 
@@ -159,10 +156,7 @@ def execute_cmd(options):
 
     params = {'image': processed_image, 'console_image_width': console_image_width, 'console_image_height': console_image_height}
     s = make_image_ASCII_string(params)
-
-    utils.clear_screen()
-    print(f"console height: {console_image_height}  console width: {console_image_width}")
-    print(s)
+    print_ASCII_image(s, params)
 
 
 def main():
