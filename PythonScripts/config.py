@@ -11,7 +11,7 @@ CMD_MAP = {
 
     'list': {
         'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\cmdlist_script.py",
-        'description': "List all the files and folders in the current working directory"
+        'description': "List all the commands"
     },
 
     'imren': {
@@ -22,6 +22,11 @@ CMD_MAP = {
     'viren': {
         'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\video_render_script.py",
         'description': "Displays the video as an ASCII drawing video"
+    },
+
+    'clicker': {
+        'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\clicker.py",
+        'description': "Generates click mouse events at certain intervals"
     }
 
 }

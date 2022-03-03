@@ -183,7 +183,7 @@ def get_video_as_ASCII_video(video_path, resolution):
     if not video: return
 
     console_params = get_console_values(video, resolution)
-    video_with_2D_frames = convert_video_frames_to_2D_array(video)
+    video_with_2D_frames = convert_video_frames_to_2D_array(video, 20)
     ASCII_video = convert_frames_to_ASCII_string_array(video_with_2D_frames, console_params)
 
     return ASCII_video, console_params
