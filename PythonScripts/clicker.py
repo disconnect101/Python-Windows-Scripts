@@ -1,14 +1,9 @@
 from pynput.mouse import Button, Controller
 import time
 import keyboard
-from colorama import init, Fore, Back, Style
-from os import sys
-import utils
-
-
-
-
-
+from colorama import init
+import sys
+from utils import utils
 
 COMMAND_NAME = ""
 AVAILABLE_OPTIONS = {

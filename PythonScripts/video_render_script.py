@@ -3,10 +3,9 @@ import sys
 import time
 from tqdm import tqdm
 import cv2
-from colorama import Fore, Back, Style, init
+from colorama import init
 
-import utils
-
+from PythonScripts import utils
 
 init(autoreset=True)
 

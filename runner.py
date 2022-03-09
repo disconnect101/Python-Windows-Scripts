@@ -1,7 +1,9 @@
 import sys
 import os
-import config as conf
-import utils
+from PythonScripts.utils import utils, config as conf
+
+if len(sys.argv) == 1:
+    sys.argv.append("list")
 
 cmd = sys.argv[1]
 args = " ".join([i for i in sys.argv[1:]])
@@ -12,3 +14,4 @@ if cmd in conf.CMD_MAP:
 else:
     utils.print_unknmown_command(cmd)
     exit()
+

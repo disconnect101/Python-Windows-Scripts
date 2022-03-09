@@ -27,6 +27,10 @@ CMD_MAP = {
     'clicker': {
         'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\clicker.py",
         'description': "Generates click mouse events at certain intervals"
+    },
+    'todo': {
+        'path': "C:\\Users\\Aditya\\Code\\Scripts\\PythonScripts\\todo.py",
+        'description': "Todo App"
     }
 
 }

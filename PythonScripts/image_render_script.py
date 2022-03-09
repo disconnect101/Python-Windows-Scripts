@@ -1,10 +1,8 @@
-import os
 import sys
 import cv2
-from colorama import Fore, Back, Style, init
+from colorama import init
 
-import utils
-
+from PythonScripts import utils
 
 ##COLORAMA INIT()
 init(autoreset=True)

@@ -1,10 +1,9 @@
 import os
 import sys
 from os import listdir
-from os.path import isfile, join
-from colorama import init, Fore, Back, Style
+from colorama import init, Fore
 
-import utils
+from PythonScripts import utils
 
 init(autoreset=True)
 
