@@ -5,8 +5,7 @@ from tqdm import tqdm
 import cv2
 from colorama import init
 
-from PythonScripts import utils
-
+from utils import utils
 init(autoreset=True)
 
 

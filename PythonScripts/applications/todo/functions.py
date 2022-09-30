@@ -27,6 +27,7 @@ def get_all_done_tasks(cursor):
     cursor.execute(sql)
     return cursor.fetchall()
 
+
 def get_all(cursor):
     done_tasks = get_all_done_tasks(cursor)
     undone_tasks = get_all_undone_tasks(cursor)
@@ -37,15 +38,27 @@ def get_all(cursor):
 def mark_task_done(conn, cursor, id):
     with conn:
         sql = "update tasks set done=1 where id=?"
-        values = (id)
+        values = (id,)
         cursor.execute(sql, values)
     return
+
+
+def get_score(cursor):
+    done_tasks, undone_tasks = get_all(cursor)
+
+    num_done = len(done_tasks)
+    num_undone = len(undone_tasks)
+
+    score = num_done/(num_done+num_undone)
+    score = score*100
+    score = round(score, 2)
+    return score
 
 
 def mark_task_undone(conn, cursor, id):
     with conn:
         sql = "update tasks set done=0 where id=?"
-        values = (id)
+        values = (id,)
         cursor.execute(sql, values)
     return
 
@@ -53,7 +66,7 @@ def mark_task_undone(conn, cursor, id):
 def delete_task(conn, cursor, id):
     with conn:
         sql = "delete from tasks where id=?"
-        values = (id)
+        values = (id,)
         cursor.execute(sql, values)
     return
 
@@ -120,17 +133,65 @@ def create_topic(conn, cursor, topic):
 
 def add_tasks_to_topic(conn, cursor, list_of_tasks, topic_id):
     with conn:
+        task_ids_set = set()
+        tasks_in_topic = get_all_tasks_in_topic(cursor, topic_id)
+
+        for tasks in tasks_in_topic:
+            task_ids_set.add(tasks[0])
+        for task_ids in list_of_tasks:
+            task_ids_set.add(task_ids)
+
         tasks_string = ""
-        for task in list_of_tasks:
-            tasks_string += str(task) + " "
+        for task_id in task_ids_set:
+            tasks_string += str(task_id) + " "
         print(tasks_string)
 
-        sql = "update topics set tasks=tasks||(?) where id=?"
+        sql = "update topics set tasks=(?) where id=?"
         print(sql)
         values = (tasks_string, topic_id)
         cursor.execute(sql, values)
 
     return
+
+
+def remove_tasks_from_topic(conn, cursor, list_of_tasks, topic_id):
+    with conn:
+        task_ids_set = set()
+        tasks_in_topic = get_all_tasks_in_topic(cursor, topic_id)
+
+        for tasks in tasks_in_topic:
+            task_ids_set.add(str(tasks[0]))
+        for task_id in list_of_tasks:
+            try:
+                task_ids_set.remove(str(task_id))
+            except KeyError as e:
+                print(f"Task '{task_id}' is not in topic '{topic_id}'")
+
+        tasks_string = ""
+        for task_id in task_ids_set:
+            tasks_string += str(task_id) + " "
+        print(tasks_string)
+
+        sql = "update topics set tasks=(?) where id=?"
+        print(sql)
+        values = (tasks_string, topic_id)
+        cursor.execute(sql, values)
+
+    return
+
+
+def mark_topic_undone(conn, cursor, topic_id):
+    with conn:
+        tasks = get_all_tasks_in_topic(cursor, topic_id)
+        tasks_id_string = ""
+
+        for i, task in enumerate(tasks):
+            if i and task:
+                tasks_id_string += ","
+            tasks_id_string += str(task[0])
+
+        sql = "update tasks set done=0 where id in (" + tasks_id_string + ")"
+        cursor.execute(sql)
 
 
 def get_all_tasks_in_topic(cursor, topic_id):

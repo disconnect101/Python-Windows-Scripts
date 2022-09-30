@@ -2,7 +2,7 @@ import sys
 import cv2
 from colorama import init
 
-from PythonScripts import utils
+from utils import utils
 
 ##COLORAMA INIT()
 init(autoreset=True)

@@ -17,7 +17,6 @@ AVAILABLE_OPTIONS = {
     }
 }
 
-
 init(autoreset=True)
 mouse = Controller()
 
@@ -25,14 +24,15 @@ mouse = Controller()
 def start_clicks(interval):
     while True:
         if keyboard.is_pressed('q'):
+            print("clicker quited")
             return
         mouse.click(Button.left, 1)
         time.sleep(interval)
-        
+
 
 
 def execute_cmd(options):
-    click_intervals = 3  #secs
+    click_intervals = 3  # seconds
 
     if '-d' in options:
         utils.print_description(COMMAND_NAME)
@@ -42,7 +42,6 @@ def execute_cmd(options):
 
     print(f"click intervals set to {click_intervals}")
     start_clicks(int(click_intervals))
-
 
 
 def register_options():
@@ -61,7 +60,7 @@ def register_options():
 
     return options
 
-	
+
 def main():
     global COMMAND_NAME
     COMMAND_NAME = sys.argv[1]
@@ -70,6 +69,6 @@ def main():
     execute_cmd(options)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
     exit()

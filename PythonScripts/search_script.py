@@ -4,7 +4,7 @@ import sys
 from os import listdir
 from colorama import init, Fore
 
-from PythonScripts import utils
+from utils import utils
 
 init(autoreset=True)
 
