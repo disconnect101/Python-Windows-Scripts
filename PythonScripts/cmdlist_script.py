@@ -1,4 +1,4 @@
-from PythonScripts.utils import config as conf
+from utils import config as conf
 from colorama import Fore, init
 
 init(autoreset=True)
